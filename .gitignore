@@ -1,0 +1,10 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# 動画・プロジェクト一次ファイル
+*.mp4
+*.exo
+*.aup2
+!test_input.mp4
