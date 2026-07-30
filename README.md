@@ -1,48 +1,46 @@
-# 🎬 動画無音自動カット ＆ AviUtl / MP4 出力ツール (v.00)
+# 🎬 動画無音自動カット ＆ 冒頭テロップ合成ツール (v.01)
 
-.mp4 動画の無音部分を自動で検出し、無音部分を取り除いたカット済み MP4 動画ファイル（`*_cut.mp4`）および AviUtl 用ファイル（`.exo` / `.aup2`）を出力するツールです。
-
----
-
-## 📌 バージョン情報 (v.00 安定版)
-
-- **バージョン**: `v.00` (初期フリーズ版)
-- **主な特徴**:
-  - FFmpeg による超高速・高精度な無音自動カット
-  - VLC Player や一般プレイヤーでの 100% 正常再生（ヘッダーメタデータの完全リセット `-map_metadata -1` 適用済み）
-  - MP4 動画直接出力（`*_cut.mp4`）＆ AviUtl / AviUtl2 互換 `.exo` / `.aup2` ファイル出力
+.mp4 動画の無音部分を自動カットし、さらに**動画冒頭 7 秒間に 3 行の指定テロップ（文字・スタイル・レイアウト）を自動合成**するツールです。
 
 ---
 
-## 💡 AviUtl / AviUtl2 での使用方法
+## 📌 バージョン情報 (v.01)
 
-1. **最も手軽な方法 (推奨)**
-   - 生成された **`[動画名]_cut.mp4`** を AviUtl / AviUtl2 にドラッグ＆ドロップします。
-   - 無音がカットされた状態の動画をすぐに編集いただけます。
-
-2. **タイムラインオブジェクト (.exo) で読み込む方法**
-   - AviUtl / AviUtl2 で「新規プロジェクトの作成」を行った状態で、生成された **`[動画名].exo`** をタイムラインにドラッグ＆ドロップ（または右クリックメニュー ➔「ファイル」➔「オブジェクトファイルを取り込み」）します。
+- **バージョン**: `v.01`
+- **主な新機能**:
+  1. **画角サイズ自動取得・同一サイズ出力**: 入力動画の画角（例: `1920x1200`）を自動解析・表示し、同じアスペクト比で出力。
+  2. **録画タイムスタンプ・ファイル名自動判定**: ファイル名（例: `GMT20260725-...`）から日付（`2026.07.25`）を自動抽出してテロップ3に反映。
+  3. **冒頭 7 秒間の 3 行テロップ自動合成**:
+     - **テロップ1**: `"ノンプロ研"` (x=-840, y=280, 拡大率 80, サイズ 90, 白縁取り＋黒文字)
+     - **テロップ2**: `"イベントタイトル"` (x=-890, y=376, 拡大率 70, サイズ 120, 白縁取り＋黒文字)
+     - **テロップ3**: `"2026.07.25"` (x=-840, y=480, 拡大率 100, サイズ 50, 白縁取り＋黒文字)
+  4. **リアルタイムレイアウトプレビュー確認画面**: 処理を実行する前に、テロップの画面配置・見た目を画面上で確認して「OK」で処理スタート！
 
 ---
 
 ## 🚀 使い方
 
-### 1. GUI (画面) で使用する場合
+### 1. GUI (画面) で使用する場合 (推奨)
 
 ```bash
 python gui_app.py
 ```
 
+1. 「参照...」ボタンから対象の `.mp4` 動画を選択します。
+2. 画角プロパティ（解像度・FPS等）が表示され、テロップ1〜3の文言や座標が読み込まれます。
+3. 右側の**「画面レイアウトプレビュー」**でテロップの配置を確認します。
+4. 必要に応じてテキストや位置を調整し、「⚡ プレビューOK ➔ 無音カット ＆ テロップ合成を実行」ボタンを押します。
+
 ### 2. コンソール (CLI) で使用する場合
 
 ```bash
-python silent_cut.py -i 対象動画.mp4
+python silent_cut.py -i 対象動画.mp4 --telop1 "ノンプロ研" --telop2 "タイトル"
 ```
 
 ---
 
 ## 📁 ファイル構成
 
-- [silent_cut.py](file:///g:/共有ドライブ/KiriPlayPark/Tool/Antigravity/kiriplaypark-projects/movieEditor/silent_cut.py): 無音カット＆出力コアスクリプト (CLI)
-- [gui_app.py](file:///g:/共有ドライブ/KiriPlayPark/Tool/Antigravity/kiriplaypark-projects/movieEditor/gui_app.py): GUI画面アプリケーション
-- [VERSION](file:///g:/共有ドライブ/KiriPlayPark/Tool/Antigravity/kiriplaypark-projects/movieEditor/VERSION): バージョン表記ファイル (`v.00`)
+- [silent_cut.py](file:///g:/共有ドライブ/KiriPlayPark/Tool/Antigravity/kiriplaypark-projects/movieEditor/silent_cut.py): コアスクリプト (`v.01`)
+- [gui_app.py](file:///g:/共有ドライブ/KiriPlayPark/Tool/Antigravity/kiriplaypark-projects/movieEditor/gui_app.py): プレビュー機能付きGUI画面 (`v.01`)
+- [VERSION](file:///g:/共有ドライブ/KiriPlayPark/Tool/Antigravity/kiriplaypark-projects/movieEditor/VERSION): バージョンファイル (`v.01`)

@@ -8,3 +8,13 @@ __pycache__/
 *.exo
 *.aup2
 !test_input.mp4
+
+# 設定・ログ・一時ファイル
+last_settings.json
+telop_presets.json
+*.log
+logs/
+*.png
+*.lnk
+specification.md
+
