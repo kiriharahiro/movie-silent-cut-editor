@@ -18,3 +18,22 @@ logs/
 *.lnk
 specification.md
 
+
+# 設定・キャッシュ・実行時ファイル
+last_settings*.json
+**/last_settings*.json
+telop_presets.json
+
+# AI対話生ログ・アシスタントメタデータ (漏洩防止)
+conversation_log*
+*.jsonl
+brain/
+.gemini/
+.agents/
+
+# エディタ・OS設定
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
