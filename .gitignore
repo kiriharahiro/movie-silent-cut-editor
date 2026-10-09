@@ -37,3 +37,10 @@ brain/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# 環境変数・クレデンシャル
+.env
+.env.*
+*.secret
+credentials.json
+token.json
